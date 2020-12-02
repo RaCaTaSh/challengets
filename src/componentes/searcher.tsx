@@ -1,18 +1,14 @@
 import React from "react";
 import "./styles.css";
 import Filters from "./filters";
-import { useState,FC  } from "react";
+import { useState, FC } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
-const Searcher:FC  = () => {
+const Searcher: FC = () => {
   const [tipe, setTipe] = useState<string>("");
-
-  type FormElement=React.FormEvent<HTMLElement>
-
-  const cleanSeacher = (e:FormElement) => {
+  const cleanSeacher = (e:React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setTipe("");
   };
-  console.log(tipe);
   return (
     <div>
       <form className="searchform">

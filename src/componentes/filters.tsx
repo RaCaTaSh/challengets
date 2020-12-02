@@ -2,11 +2,11 @@ import React,{FC} from "react";
 import "./styles.css";
 import { useState  } from "react";
 import Querys from "../apollo/querys";
-/* type FormElement=React.FormEvent<HTMLElement> */
+
 interface FiltersProps{
   search:string
 }
-type FormElement=React.FormEvent<HTMLElement>
+type FormElement=React.ChangeEvent<HTMLInputElement>
 const Filters:FC<FiltersProps>= ({ search })=> {
   const [option, setOption] = useState<string>("charactername");
   const optionChange = (event:FormElement) => {
@@ -30,7 +30,7 @@ const Filters:FC<FiltersProps>= ({ search })=> {
                   id="charactername"
                   name="filter"
                   value="charactername"
-                  onChange={optionChange} // eslint-disable-next-line
+                  onChange={optionChange} 
                   checked={option == "charactername"}
                 />
                 <label>Name</label>
@@ -43,7 +43,7 @@ const Filters:FC<FiltersProps>= ({ search })=> {
                   id="charactertype"
                   name="filter"
                   value="charactertype"
-                  onChange={optionChange} // eslint-disable-next-line
+                  onChange={optionChange} 
                 />
                 <label>Type</label>
               </p>
@@ -76,7 +76,7 @@ const Filters:FC<FiltersProps>= ({ search })=> {
               </p>
             </li>
           </ul>
-          <h2>Characters</h2>
+          <h2>Episodes</h2>
           <ul>
             <li>
               <p className="input-label">
@@ -105,7 +105,9 @@ const Filters:FC<FiltersProps>= ({ search })=> {
           </ul>
         </form>
       </div>
-      <Querys search={search} option={option} className="busc" />
+      <div className="busc">
+      <Querys search={search} option={option}  />
+      </div>
     </div>
   );
 }

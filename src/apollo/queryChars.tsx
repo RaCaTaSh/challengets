@@ -1,22 +1,29 @@
+import React, { useState, useEffect, FC } from "react";
 import { gql } from "apollo-boost";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import Character from "../componentes/character";
-import { useState, useEffect ,FC} from "react";
 import Loader from "../componentes/loader";
 import { Pagination } from "antd";
-import React from 'react'
 
-interface CharactersQueryProps {
-  search:string,
-  option:string
+interface ICharactersQueryProps {
+  search: string;
+  option: string;
 }
+interface ICharacter {
+  id: number;
+  name: string;
+  type: string;
+  gender: string;
+  species: string;
+  image: string;
+}
+const CharactersQuery: FC<ICharactersQueryProps> = ({ search, option }) => {
+  const [searchs, setSearchs] = useState<any>([]);
+  const [page, setPage] = useState<number>(1);
 
-const CharactersQuery:FC<CharactersQueryProps>=({ search, option })=> {
-  const [searchs, setSearchs] = useState([]);
-  const [page, setPage] = useState(1);
   const GET_CHARACTERS = gql`
-    query GET_CHAR($name: String, $page: Int,$type:String) {
-      characters(page: $page, filter: { name: $name ,type:$type }) {
+    query GET_CHAR($name: String, $page: Int, $type: String) {
+      characters(page: $page, filter: { name: $name, type: $type }) {
         info {
           count
           pages
@@ -34,38 +41,43 @@ const CharactersQuery:FC<CharactersQueryProps>=({ search, option })=> {
       }
     }
   `;
-  var searchname:string;
-  var searchtype:string;
-  
+
+  var searchname: string;
+  var searchtype: string;
+
   if (option === "charactername") {
-    searchname=search
-    searchtype=''
-  }else{
-    searchname=''
-    searchtype=search
+    searchname = search;
+    searchtype = "";
+  } else {
+    searchname = "";
+    searchtype = search;
   }
   const { data, loading, error } = useQuery(GET_CHARACTERS, {
     variables: { name: searchname, page: page, type: searchtype },
   });
-  console.log(data)
-  console.log(loading)
-  console.log(error)
-  const onChange = (page:number) => {
+  const onChange = (page: number) => {
     setPage(page);
   };
 
   useEffect(() => {
     if (data && !loading && !error) {
       setSearchs([...data.characters.results]);
-    } 
-  }, [data,error,loading]);
+      console.log(searchs);
+    }
+  }, [data, error, loading]);
 
-  if (loading) return <Loader className="loader" />;
+  if (loading)
+    return (
+      <div className="loader">
+        <Loader />
+      </div>
+    );
   if (error) return <h2 className="error">No results found</h2>;
+
   return (
     <div>
       <div className="contenedor">
-        {searchs.map((search) => {
+        {searchs.map((search: ICharacter) => {
           return <Character character={search} key={search.id} />;
         })}
         <div className="pagination">
@@ -78,6 +90,6 @@ const CharactersQuery:FC<CharactersQueryProps>=({ search, option })=> {
       </div>
     </div>
   );
-}
+};
 
-export default  CharactersQuery;
+export default CharactersQuery;

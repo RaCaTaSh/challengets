@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
-/* import CharModal from './modals/charModal' */
-const Character = ({ character }) => {
+interface CharacterProp{
+  character:{
+  id:number,
+  name:string,
+  type:string,
+  gender:string,
+  species:string,
+  image:string
+  }
+}
+const Character:FC<CharacterProp> = ({ character }) => {
   const [modal, setModal] = useState(false);
   const HideModal = () => {
     setModal(false);
@@ -13,13 +22,12 @@ const Character = ({ character }) => {
   };
   return (
     <div key={character.id} className="character">
-      <div onClick={ShowModal} >
+      <div onClick={ShowModal}>
         <img alt={character.name} src={character.image} />
         <h1>{character.name}</h1>
       </div>
       <div>
         <Modal
-          tittle="Modal Header"
           visible={modal}
           onOk={HideModal}
           onCancel={HideModal}
