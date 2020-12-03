@@ -1,15 +1,15 @@
-import React,{FC} from "react";
+import React, { FC } from "react";
 import "./styles.css";
-import { useState  } from "react";
+import { useState } from "react";
 import Querys from "../apollo/querys";
 
-interface FiltersProps{
-  search:string
+interface FiltersProps {
+  search: string;
 }
-type FormElement=React.ChangeEvent<HTMLInputElement>
-const Filters:FC<FiltersProps>= ({ search })=> {
+type FormElement = React.ChangeEvent<HTMLInputElement>;
+const Filters: FC<FiltersProps> = ({ search }) => {
   const [option, setOption] = useState<string>("charactername");
-  const optionChange = (event:FormElement) => {
+  const optionChange = (event: FormElement) => {
     setOption(event.target.value);
   };
   return (
@@ -30,7 +30,7 @@ const Filters:FC<FiltersProps>= ({ search })=> {
                   id="charactername"
                   name="filter"
                   value="charactername"
-                  onChange={optionChange} 
+                  onChange={optionChange}
                   checked={option == "charactername"}
                 />
                 <label>Name</label>
@@ -43,7 +43,7 @@ const Filters:FC<FiltersProps>= ({ search })=> {
                   id="charactertype"
                   name="filter"
                   value="charactertype"
-                  onChange={optionChange} 
+                  onChange={optionChange}
                 />
                 <label>Type</label>
               </p>
@@ -87,7 +87,7 @@ const Filters:FC<FiltersProps>= ({ search })=> {
                   value="episodename"
                   onChange={optionChange}
                 />
-                <label >Name</label>
+                <label>Name</label>
               </p>
             </li>
             <li>
@@ -106,9 +106,9 @@ const Filters:FC<FiltersProps>= ({ search })=> {
         </form>
       </div>
       <div className="busc">
-      <Querys search={search} option={option}  />
+        <Querys search={search} option={option} />
       </div>
     </div>
   );
-}
+};
 export default Filters;
