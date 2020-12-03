@@ -2,20 +2,22 @@ import React, { useState, FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 
-interface EpisodeProp{
-  episode:{
-    id:string
-    name:string
-    air_date:string
-    episode:string
-    characters :[{
-      name:string
-      image:string
-    }]
-  }
+interface EpisodeProp {
+  episode: {
+    id: string;
+    name: string;
+    air_date: string;
+    episode: string;
+    characters: [
+      {
+        name: string;
+        image: string;
+      }
+    ];
+  };
 }
-  
-  const Episode:FC<EpisodeProp> = ({ episode }) => {
+
+const Episode: FC<EpisodeProp> = ({ episode }) => {
   const [modal, setModal] = useState(false);
   const HideModal = () => {
     setModal(false);
@@ -42,6 +44,7 @@ interface EpisodeProp{
       </div>
       <div>
         <Modal
+          key={episode.id}
           visible={modal}
           onOk={HideModal}
           onCancel={HideModal}

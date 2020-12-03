@@ -22,7 +22,7 @@ const Character:FC<CharacterProp> = ({ character }) => {
   };
   return (
     <div key={character.id} className="character">
-      <div onClick={ShowModal}>
+      <div onClick={ShowModal} className="character2">
         <img alt={character.name} src={character.image} />
         <h1>{character.name}</h1>
       </div>

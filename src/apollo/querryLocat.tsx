@@ -69,7 +69,7 @@ const LOCATIONS_QUERY: FC<ILocationsQueryProps> = ({ search, option }) => {
       setLocs([...data.locations.results]);
     }
   }, [data, loading, error]);
-
+ console.log(data, option)
   if (loading)
     return (
       <div className="loader">
@@ -78,7 +78,7 @@ const LOCATIONS_QUERY: FC<ILocationsQueryProps> = ({ search, option }) => {
       </div>
     );
   if (error) return <h2 className="error">No results found</h2>;
-
+ 
   return (
     <div>
       <div className="contenedor">

@@ -5,13 +5,9 @@ import { useState, FC } from "react";
 import { DeleteOutlined } from "@ant-design/icons";
 const Searcher: FC = () => {
   const [tipe, setTipe] = useState<string>("");
-  const cleanSeacher = (e:React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setTipe("");
-  };
   return (
     <div>
-      <form className="searchform">
+      <form className="searchform"> 
         <input
           type="text"
           id="searcher"
@@ -19,12 +15,12 @@ const Searcher: FC = () => {
           onChange={(e) => setTipe(e.target.value)}
           name="search"
         />
-        <button onClick={cleanSeacher}>
+        <button type="reset" onClick={()=>setTipe('')}>
           <DeleteOutlined className="icon" />
         </button>
       </form>
       <Filters search={tipe} />
     </div>
   );
-};
+}
 export default Searcher;
