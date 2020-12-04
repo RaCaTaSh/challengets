@@ -201,13 +201,19 @@
   .filtros {
     position: static;
     width: 100%;
-    height: 20%;
+    
     text-align: center;
-    padding-left: 10%;
+    padding-left: 0%;
+    
   }
   .filtros div {
     display: inline-block;
-    padding-right: 80px;
+    padding-right: 2%;
+    font-size: 12px;
+  }
+  .filtros div ul li{
+    display:inline-block;
+    padding-right: 1%;
   }
 
   .filtros .input-label {
@@ -237,6 +243,14 @@
     min-height: 205px;
     padding-top: 20px;
     box-sizing: border-box;
+  }
+  .pagination{
+    padding-left: 33%;
+  }
+}
+@media screen and (max-width: 518px) {
+  .pagination{
+    padding-left: 27%;
   }
 }
 .lds-roller {
