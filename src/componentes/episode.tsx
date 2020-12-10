@@ -16,9 +16,12 @@ interface EpisodeProp {
     ];
   };
 }
-
+interface Character {
+  name: string;
+  image: string;
+}
 const Episode: FC<EpisodeProp> = ({ episode }) => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
   const HideModal = () => {
     setModal(false);
   };
@@ -61,7 +64,7 @@ const Episode: FC<EpisodeProp> = ({ episode }) => {
           <br />
           <strong>Characters: </strong>
           <br />
-          {chars.map((char) => {
+          {chars.map((char: Character) => {
             return (
               <div className="sub-container">
                 <p>{char.name}</p>

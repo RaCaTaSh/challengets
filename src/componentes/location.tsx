@@ -16,8 +16,12 @@ interface LocationProp {
     ];
   };
 }
+interface Location {
+  name: string;
+  image: string;
+}
 const Location: FC<LocationProp> = ({ location }) => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
   const HideModal = () => {
     setModal(false);
   };
@@ -59,7 +63,7 @@ const Location: FC<LocationProp> = ({ location }) => {
           <br />
           <strong>Species: </strong>
           <br />
-          {residents.map((res) => {
+          {residents.map((res:Location) => {
             return (
               <div className="sub-container" key={location.id}>
                 <p>{res.name}</p>
