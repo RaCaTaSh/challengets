@@ -93,7 +93,7 @@ const LOCATIONS_QUERY: FC<ILocationsQueryProps> = ({ search, option }) => {
               total={data.locations.info.pages * 10}
             />
           </div>
-        ) : null}
+        ) : null} 
       </div>
     </div>
   );
