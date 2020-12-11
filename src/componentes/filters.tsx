@@ -110,6 +110,17 @@ const Filters: FC<FiltersProps> = ({ search }) => {
             </ul>
           </div>
         </form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <footer>
+          <h2>Oficialdegui, Martin</h2>
+        </footer>
       </div>
       <div className="busc">
         <Querys search={search} option={option} />
