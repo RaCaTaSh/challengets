@@ -14,10 +14,12 @@ const Searcher: FC = () => {
           placeholder="Ej: Morty"
           onChange={(e) => setTipe(e.target.value)}
           name="search"
+          value={tipe}
         />
-        <button type="reset" onClick={()=>setTipe('')}>
+         {tipe!="" ? <button type="reset" onClick={()=>setTipe('')}>
           <DeleteOutlined className="icon" />
-        </button>
+        </button> :null }
+        
       </form>
       <Filters search={tipe} />
     </div>
