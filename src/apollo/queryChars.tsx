@@ -80,13 +80,15 @@ const CharactersQuery: FC<ICharactersQueryProps> = ({ search, option }) => {
         {searchs.map((search: ICharacter) => {
           return <Character character={search} key={search.id} />;
         })}
-        <div className="pagination">
-          <Pagination
-            current={page}
-            onChange={onChange}
-            total={data.characters.info.pages * 10}
-          />
-        </div>
+           {data.characters.info.pages != "1" ? (
+          <div className="pagination">
+            <Pagination
+              current={page}
+              onChange={onChange}
+              total={data.characters.info.pages * 10}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );

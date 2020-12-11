@@ -81,14 +81,15 @@ const EPISODE_QUERY: FC<IEpisodesQueryProps> = ({ search, option }) => {
         {epis.map((episode: IEpisode) => {
           return <Episode episode={episode} key={episode.id} />;
         })}
-
-        <div className="pagination">
-          <Pagination
-            current={page}
-            onChange={onChange}
-            total={data.episodes.info.pages * 10}
-          />
-        </div>
+        {data.episodes.info.pages != "1" ? (
+          <div className="pagination">
+            <Pagination
+              current={page}
+              onChange={onChange}
+              total={data.episodes.info.pages * 10}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );

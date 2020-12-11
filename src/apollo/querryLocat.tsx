@@ -85,14 +85,15 @@ const LOCATIONS_QUERY: FC<ILocationsQueryProps> = ({ search, option }) => {
         {locs.map((location: ILocation) => {
           return <Location location={location} key={location.id} />;
         })}
-        {console.log(data)}
-        <div className="pagination">
-          <Pagination
-            current={page}
-            onChange={onChange}
-            total={data.locations.info.pages * 10}
-          />
-        </div>
+        {data.locations.info.pages != "1" ? (
+          <div className="pagination">
+            <Pagination
+              current={page}
+              onChange={onChange}
+              total={data.locations.info.pages * 10}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
