@@ -15,6 +15,8 @@
 </ol> 
 <p>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</p>
 <h2>Images</h2>
-<div>
-<img src="images/screen1.png" width="300" height="600">
-</div>
+<div display="inline">
+<img src="images/screen1.png" width="600" height="600">
+
+
+
