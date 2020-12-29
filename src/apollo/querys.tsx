@@ -2,11 +2,11 @@ import React, { FC } from "react";
 import CharactersQuery from "./queryChars";
 import LOCATIONS_QUERY from "./querryLocat";
 import EPISODE_QUERY from "./querryEpis";
-interface QuerysProps {
+interface Props {
   option: string;
   search: string;
 }
-const Querys: FC<QuerysProps> = ({ option, search }) => {
+const Querys: FC<Props> = ({ option, search }) => {
   
   const char: boolean = option === "charactername" || option === "charactertype";
   const loc : boolean = option === "locationname"  || option === "locationtype";

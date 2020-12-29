@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
-import Location from "../componentes/location";
-import Loader from "../componentes/loader";
+import Location from "../components/location";
+import Loader from "../components/loader";
 import { Pagination } from "antd";
 
-interface ILocationsQueryProps {
+interface Props {
   search: string;
   option: string;
 }
@@ -21,7 +21,7 @@ interface ILocation {
     }
   ];
 }
-const LOCATIONS_QUERY: FC<ILocationsQueryProps> = ({ search, option }) => {
+const LOCATIONS_QUERY: FC<Props> = ({ search, option }) => {
   const [locs, setLocs] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
   const GET_LOCATIONS = gql`

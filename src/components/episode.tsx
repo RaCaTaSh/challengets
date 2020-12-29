@@ -2,7 +2,7 @@ import React, { useState, FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 
-interface EpisodeProp {
+interface Props {
   episode: {
     id: string;
     name: string;
@@ -20,24 +20,23 @@ interface Character {
   name: string;
   image: string;
 }
-const Episode: FC<EpisodeProp> = ({ episode }) => {
+const Episode: FC<Props> = ({ episode }) => {
   const [modal, setModal] = useState<boolean>(false);
-  const HideModal = () => {
+  const HideModal = (): void => {
     setModal(false);
   };
-  const ShowModal = () => {
+  const ShowModal = (): void => {
     setModal(true);
   };
-  var chars = [];
-  if (episode.characters.length > 5) {
-    for (let i = 0; i < 5; i++) {
-      chars.push(episode.characters[i]);
-    }
-  } else {
-    for (let i = 0; i < episode.characters.length; i++) {
-      chars.push(episode.characters[i]);
+  const chars = [];
+
+  for (let i = 0; i < 5; i++) {
+    chars.push(episode.characters[i]);
+    if (i === episode.characters.length - 1) {
+      break;
     }
   }
+
   return (
     <div key={episode.id}>
       <div className="episode" onClick={ShowModal}>

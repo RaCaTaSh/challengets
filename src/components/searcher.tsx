@@ -16,7 +16,7 @@ const Searcher: FC = () => {
           name="search"
           value={tipe}
         />
-         {tipe!="" ? <button type="reset" onClick={()=>setTipe('')}>
+         {tipe!=="" ? <button type="reset" onClick={()=>setTipe('')}>
           <DeleteOutlined className="icon" />
         </button> :null }
         

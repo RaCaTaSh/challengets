@@ -1,23 +1,23 @@
-import React, { useState,FC } from "react";
+import React, { useState, FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
-interface CharacterProp{
-  character:{
-  id:number,
-  name:string,
-  type:string,
-  gender:string,
-  species:string,
-  image:string
-  }
+interface Props {
+  character: {
+    id: number;
+    name: string;
+    type: string;
+    gender: string;
+    species: string;
+    image: string;
+  };
 }
-const Character:FC<CharacterProp> = ({ character }) => {
-  const [modal, setModal] = useState(false);
-  const HideModal = () => {
+const Character: FC<Props> = ({ character }) => {
+  const [modal, setModal] = useState<boolean>(false);
+  const HideModal = (): void => {
     setModal(false);
   };
-  const ShowModal = () => {
+  const ShowModal = (): void => {
     setModal(true);
   };
   return (
@@ -32,7 +32,6 @@ const Character:FC<CharacterProp> = ({ character }) => {
           onOk={HideModal}
           onCancel={HideModal}
           footer={null}
-          bodyStyle={{ font: "Arial", fontSize: "medium", textAlign: "center" }}
         >
           <img alt={character.name} src={character.image} />
           <br />

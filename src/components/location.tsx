@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 
-interface LocationProp {
+interface Props {
   location: {
     id: number;
     name: string;
@@ -20,24 +20,23 @@ interface Location {
   name: string;
   image: string;
 }
-const Location: FC<LocationProp> = ({ location }) => {
+const Location: FC<Props> = ({ location }) => {
   const [modal, setModal] = useState<boolean>(false);
-  const HideModal = () => {
+  const HideModal = (): void => {
     setModal(false);
   };
-  const ShowModal = () => {
+  const ShowModal = (): void => {
     setModal(true);
   };
-  var residents = [];
-  if (location.residents.length > 5) {
-    for (let i = 0; i < 5; i++) {
-      residents.push(location.residents[i]);
-    }
-  } else {
-    for (let i = 0; i < location.residents.length; i++) {
-      residents.push(location.residents[i]);
+  const residents = [];
+
+  for (let i = 0; i < 5; i++) {
+    residents.push(location.residents[i]);
+    if (i === location.residents.length - 1) {
+      break;
     }
   }
+
   return (
     <div key={location.id}>
       <div className="location" onClick={ShowModal}>
@@ -63,7 +62,7 @@ const Location: FC<LocationProp> = ({ location }) => {
           <br />
           <strong>Species: </strong>
           <br />
-          {residents.map((res:Location) => {
+          {residents.map((res: Location) => {
             return (
               <div className="sub-container" key={location.id}>
                 <p>{res.name}</p>

@@ -93,6 +93,11 @@
   float: right;
   min-width: 300px;
 }
+.mod {
+  font: "Arial";
+  font-size: "medium";
+  text-align: "center";
+}
 .pagination {
   margin-top: 5%;
   margin-bottom: 5%;
@@ -201,18 +206,17 @@
   .filtros {
     position: static;
     width: 100%;
-    
+
     text-align: center;
     padding-left: 0%;
-    
   }
   .filtros div {
     display: inline-block;
     padding-right: 2%;
     font-size: 12px;
   }
-  .filtros div ul li{
-    display:inline-block;
+  .filtros div ul li {
+    display: inline-block;
     padding-right: 1%;
   }
 
@@ -244,12 +248,12 @@
     padding-top: 20px;
     box-sizing: border-box;
   }
-  .pagination{
+  .pagination {
     padding-left: 33%;
   }
 }
 @media screen and (max-width: 518px) {
-  .pagination{
+  .pagination {
     padding-left: 27%;
   }
 }

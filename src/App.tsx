@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import Searcher from "./componentes/searcher";
+import Searcher from "./components/searcher";
 function App() {
   return (
     <div className="App">

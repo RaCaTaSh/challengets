@@ -3,11 +3,11 @@ import "./styles.css";
 import { useState } from "react";
 import Querys from "../apollo/querys";
 
-interface FiltersProps {
+interface Props {
   search: string;
 }
 type FormElement = React.ChangeEvent<HTMLInputElement>;
-const Filters: FC<FiltersProps> = ({ search }) => {
+const Filters: FC<Props> = ({ search }) => {
   const [option, setOption] = useState<string>("charactername");
   const optionChange = (event: FormElement) => {
     setOption(event.target.value);
@@ -32,7 +32,7 @@ const Filters: FC<FiltersProps> = ({ search }) => {
                     name="filter"
                     value="charactername"
                     onChange={optionChange} // eslint-disable-next-line
-                    checked={option == "charactername"}
+                    checked={option === "charactername"}
                   />
                   <label htmlFor="charactername">Name</label>
                 </p>

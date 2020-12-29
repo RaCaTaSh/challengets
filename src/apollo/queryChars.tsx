@@ -1,11 +1,11 @@
 import React, { useState, useEffect, FC } from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
-import Character from "../componentes/character";
-import Loader from "../componentes/loader";
+import Character from "../components/character";
+import Loader from "../components/loader";
 import { Pagination } from "antd";
 
-interface ICharactersQueryProps {
+interface Props {
   search: string;
   option: string;
 }
@@ -17,7 +17,7 @@ interface ICharacter {
   species: string;
   image: string;
 }
-const CharactersQuery: FC<ICharactersQueryProps> = ({ search, option }) => {
+const CharactersQuery: FC<Props> = ({ search, option }) => {
   const [searchs, setSearchs] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, FC } from "react";
 import { gql } from "apollo-boost";
-import Episode from "../componentes/episode";
-import Loader from "../componentes/loader";
+import Episode from "../components/episode";
+import Loader from "../components/loader";
 import { useQuery } from "@apollo/client";
 import { Pagination } from "antd";
 
-interface IEpisodesQueryProps {
+interface Props {
   search: string;
   option: string;
 }
@@ -21,7 +21,7 @@ interface IEpisode {
     }
   ];
 }
-const EPISODE_QUERY: FC<IEpisodesQueryProps> = ({ search, option }) => {
+const EPISODE_QUERY: FC<Props> = ({ search, option }) => {
   const [epis, setEpis] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
   const GET_EPISODES = gql`
