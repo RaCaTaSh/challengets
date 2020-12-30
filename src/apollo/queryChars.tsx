@@ -1,7 +1,6 @@
 import React, { useState, useEffect, FC } from "react";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
-import Character from "../components/character";
 import Loader from "../components/loader";
 import { Pagination } from "antd";
 import Card from "../components/all";

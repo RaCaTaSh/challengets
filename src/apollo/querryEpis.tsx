@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FC } from "react";
 import { gql } from "apollo-boost";
-import Episode from "../components/episode";
 import Loader from "../components/loader";
 import { useQuery } from "@apollo/client";
 import {Pagination } from "antd";
