@@ -14,9 +14,9 @@
   <li>Open [http://localhost:3000](http://localhost:3000) to view it in the browser.</li>
 </ol> 
 <p>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</p>
-<h2>Images</h2>
+<h2>Image</h2>
 <div display="inline">
-<img src="images/screen1.png" width="600" height="600">
+<img src="images/screen1.png" width="1920" height="680">
 
 
 
