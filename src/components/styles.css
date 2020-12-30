@@ -129,7 +129,10 @@
   border: 1px black solid;
 }
 .filtros h1 {
-  font-size: 30px;
+  font-size: 40px;
+}
+.filtros label {
+  margin-left: 10px;
 }
 .filtros li {
   list-style-type: none;

@@ -1,15 +1,15 @@
 export interface charInterface{
-    character: {
+ 
       id: number;
       name: string;
       type: string;
       gender: string;
       species: string;
       image: string;
-    };
+
 }
 export interface locInterface{
-  location: {
+
     id: number;
     name: string;
     type: string;
@@ -20,10 +20,9 @@ export interface locInterface{
         image: string;
       }
     ];
-  };
+
 }
 export interface epiInterface{
-  episode: {
     id: string;
     name: string;
     air_date: string;
@@ -34,5 +33,4 @@ export interface epiInterface{
         image: string;
       }
     ];
-  };
 }

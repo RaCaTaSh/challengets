@@ -3,7 +3,8 @@ import { gql } from "apollo-boost";
 import Episode from "../components/episode";
 import Loader from "../components/loader";
 import { useQuery } from "@apollo/client";
-import { Pagination } from "antd";
+import {Pagination } from "antd";
+import Card from "../components/all";
 
 interface Props {
   search: string;
@@ -79,9 +80,9 @@ const EPISODE_QUERY: FC<Props> = ({ search, option }) => {
     <div>
       <div className="contenedor">
         {epis.map((episode: IEpisode) => {
-          return <Episode episode={episode} key={episode.id} />;
+          return <Card data={episode} type="episodes" key={episode.id} />;
         })}
-        {data.episodes.info.pages != "1" ? (
+        {data.episodes.info.pages !== "1" ? (
           <div className="pagination">
             <Pagination
               current={page}

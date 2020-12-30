@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import "./styles.css";
 import { Modal } from "antd";
+import useModal from "../hooks/useModal";
 
 interface Props {
   location: {
@@ -21,13 +22,7 @@ interface Location {
   image: string;
 }
 const Location: FC<Props> = ({ location }) => {
-  const [modal, setModal] = useState<boolean>(false);
-  const HideModal = (): void => {
-    setModal(false);
-  };
-  const ShowModal = (): void => {
-    setModal(true);
-  };
+  const { isOpen, handlerOpenModal } = useModal();
   const residents = [];
 
   for (let i = 0; i < 5; i++) {
@@ -39,16 +34,16 @@ const Location: FC<Props> = ({ location }) => {
 
   return (
     <div key={location.id}>
-      <div className="location" onClick={ShowModal}>
+      <div className="location" onClick={handlerOpenModal}>
         <p>{location.name}</p>
         <br />
         <p>{location.dimension}</p>
       </div>
       <div>
         <Modal
-          visible={modal}
-          onOk={HideModal}
-          onCancel={HideModal}
+          visible={isOpen}
+          onOk={handlerOpenModal}
+          onCancel={handlerOpenModal}
           footer={null}
           bodyStyle={{ font: "Arial", fontSize: "medium", textAlign: "center" }}
         >

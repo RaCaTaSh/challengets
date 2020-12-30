@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import Location from "../components/location";
 import Loader from "../components/loader";
 import { Pagination } from "antd";
+import Card from "../components/all";
 
 interface Props {
   search: string;
@@ -69,7 +70,6 @@ const LOCATIONS_QUERY: FC<Props> = ({ search, option }) => {
       setLocs([...data.locations.results]);
     }
   }, [data, loading, error]);
- console.log(data, option)
   if (loading)
     return (
       <div className="loader">
@@ -83,9 +83,13 @@ const LOCATIONS_QUERY: FC<Props> = ({ search, option }) => {
     <div>
       <div className="contenedor">
         {locs.map((location: ILocation) => {
-          return <Location location={location} key={location.id} />;
+          return <Card data={location} type="locations" key={location.id}>
+            <div>
+              {location}
+            </div>
+          </Card> ;
         })}
-        {data.locations.info.pages != "1" ? (
+        {data.locations.info.pages !== "1" ? (
           <div className="pagination">
             <Pagination
               current={page}

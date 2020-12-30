@@ -2,6 +2,8 @@ import React, { useState, FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
+import Card from './all'
+import useModal from './../hooks/useModal'
 interface Props {
   character: {
     id: number;
@@ -13,25 +15,20 @@ interface Props {
   };
 }
 const Character: FC<Props> = ({ character }) => {
-  const [modal, setModal] = useState<boolean>(false);
-  const HideModal = (): void => {
-    setModal(false);
-  };
-  const ShowModal = (): void => {
-    setModal(true);
-  };
+  const {isOpen,handlerOpenModal}=useModal()
   return (
     <div key={character.id} className="character">
-      <div onClick={ShowModal} className="character2">
+      <div onClick={handlerOpenModal} className="character2">
         <img alt={character.name} src={character.image} />
         <h1>{character.name}</h1>
       </div>
       <div>
         <Modal
-          visible={modal}
-          onOk={HideModal}
-          onCancel={HideModal}
+          visible={isOpen}
+          onOk={handlerOpenModal}
+          onCancel={handlerOpenModal}
           footer={null}
+          bodyStyle={{ font: "Arial", fontSize: "medium", textAlign: "center" }}
         >
           <img alt={character.name} src={character.image} />
           <br />

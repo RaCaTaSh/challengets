@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import Character from "../components/character";
 import Loader from "../components/loader";
 import { Pagination } from "antd";
+import Card from "../components/all";
 
 interface Props {
   search: string;
@@ -62,7 +63,6 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
   useEffect(() => {
     if (data && !loading && !error) {
       setSearchs([...data.characters.results]);
-      console.log(searchs);
     }
   }, [data, error, loading]);
 
@@ -78,9 +78,9 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
     <div>
       <div className="contenedor">
         {searchs.map((search: ICharacter) => {
-          return <Character character={search} key={search.id} />;
+          return <Card data={search} type="characters" key={search.id}/>;
         })}
-           {data.characters.info.pages != "1" ? (
+        {data.characters.info.pages != "1" ? (
           <div className="pagination">
             <Pagination
               current={page}
@@ -95,3 +95,7 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
 };
 
 export default CharactersQuery;
+
+{
+  /* <Card data={search} type="characters"/> */
+}
