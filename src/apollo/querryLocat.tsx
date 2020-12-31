@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 import Loader from "../components/loader";
 import { Pagination } from "antd";
-import Card from "../components/all";
+import Card from "../components/CharLocEpi";
 
 interface Props {
   search: string;
@@ -82,11 +82,7 @@ const LOCATIONS_QUERY: FC<Props> = ({ search, option }) => {
     <div>
       <div className="contenedor">
         {locs.map((location: ILocation) => {
-          return <Card data={location} type="locations" key={location.id}>
-            <div>
-              {location}
-            </div>
-          </Card> ;
+          return <Card data={location} type="locations" key={location.id}/>
         })}
         {data.locations.info.pages !== "1" ? (
           <div className="pagination">

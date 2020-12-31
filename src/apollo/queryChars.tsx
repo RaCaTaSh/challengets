@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/client";
 import Loader from "../components/loader";
 import { Pagination } from "antd";
-import Card from "../components/all";
+import Card from "../components/CharLocEpi";
 
 interface Props {
   search: string;

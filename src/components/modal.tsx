@@ -42,6 +42,8 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
         <div>
           <img alt={data.name} src={data.image} />
           <br />
+          <strong>{data.name}</strong>
+          <br />
           <strong>Type: </strong>
           {data.type}
           <br />
@@ -53,11 +55,10 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
         </div>
       ) : null}
 
-      <strong>{data.name}</strong>
-      <br />
-
       {type === "locations" ? (
         <div>
+          <strong>{data.name}</strong>
+          <br />
           <strong>Type: </strong>
           {data.type}
           <br />
@@ -71,6 +72,8 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
 
       {type === "episodes" ? (
         <div>
+          <strong>{data.name}</strong>
+          <br />
           <strong>Release date: </strong>
           {data.air_date}
           <br />

@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import Loader from "../components/loader";
 import { useQuery } from "@apollo/client";
 import {Pagination } from "antd";
-import Card from "../components/all";
+import Card from "../components/CharLocEpi";
 
 interface Props {
   search: string;
@@ -59,7 +59,7 @@ const EPISODE_QUERY: FC<Props> = ({ search, option }) => {
   const { data, loading, error } = useQuery(GET_EPISODES, {
     variables: { name: searchname, page: page, episode: searchepisode },
   });
-  const onChange = (page: number) => {
+  const onChange = (page: number):void => {
     setPage(page);
   };
   useEffect(() => {
