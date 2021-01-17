@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 import "antd/dist/antd.css";

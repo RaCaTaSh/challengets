@@ -127,6 +127,7 @@
   left: 0px;
   padding-left: 10px;
   border: 1px black solid;
+  border-radius: 2px;
 }
 .filtros h1 {
   font-size: 40px;

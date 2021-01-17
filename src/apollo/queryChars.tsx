@@ -20,49 +20,114 @@ interface ICharacter {
 const CharactersQuery: FC<Props> = ({ search, option }) => {
   const [searchs, setSearchs] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
-
-  const GET_CHARACTERS = gql`
-    query GET_CHAR($name: String, $page: Int, $type: String) {
-      characters(page: $page, filter: { name: $name, type: $type }) {
-        info {
-          count
-          pages
-          next
-          prev
+  function QueryType(option: string): any {
+    if (option.startsWith("character")) {
+      return gql`
+        query GET_CHAR($name: String, $page: Int, $type: String) {
+          characters(page: $page, filter: { name: $name, type: $type }) {
+            info {
+              count
+              pages
+              next
+              prev
+            }
+            results {
+              id
+              name
+              type
+              gender
+              species
+              image
+            }
+          }
         }
-        results {
-          id
-          name
-          type
-          gender
-          species
-          image
-        }
-      }
+      `;
     }
-  `;
+    if (option.startsWith("location")) {
+      return gql`
+        query GET_LOCS($name: String, $page: Int, $type: String) {
+          locations(page: $page, filter: { name: $name, type: $type }) {
+            info {
+              count
+              pages
+              next
+              prev
+            }
+            results {
+              id
+              name
+              type
+              dimension
+              residents {
+                name
+                image
+              }
+            }
+          }
+        }
+      `;
+    }
+    if (option.startsWith("episode")) {
+      return gql`
+        query GET_EPIS($name: String, $page: Int, $episode: String) {
+          episodes(page: $page, filter: { name: $name, episode: $episode }) {
+            info {
+              count
+              pages
+              next
+              prev
+            }
+            results {
+              id
+              name
+              air_date
+              episode
+              characters {
+                name
+                image
+              }
+            }
+          }
+        }
+      `;
+    }
+  }
 
   var searchname: string;
   var searchtype: string;
 
-  if (option === "charactername") {
+  if (option === "charactername" || "locationname" || "episodename") {
     searchname = search;
     searchtype = "";
   } else {
     searchname = "";
     searchtype = search;
   }
-  const { data, loading, error } = useQuery(GET_CHARACTERS, {
+  const { data, loading, error } = useQuery(QueryType(option), {
     variables: { name: searchname, page: page, type: searchtype },
   });
-  const onChange = (page: number) => {
+  const onChange = (page: number): void => {
     setPage(page);
   };
+  
 
   useEffect(() => {
+    var pagestotal: number = 0;
     if (data && !loading && !error) {
-      setSearchs([...data.characters.results]);
-    }
+      if (option.startsWith("character")) {
+        setSearchs([...data.characters.results]);
+        pagestotal = data.characters.info.pages;
+        console.log(pagestotal);
+      }
+      if (option.startsWith("location")) {
+        setSearchs([...data.location.results]);
+        pagestotal = data.locations.info.pages;
+      }
+      if (option.startsWith("episodes")) {
+        setSearchs([...data.episodes.results]);
+        pagestotal = data.episodes.info.pages;
+      }
+    } // eslint-disable-next-line
   }, [data, error, loading]);
 
   if (loading)
@@ -77,14 +142,14 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
     <div>
       <div className="contenedor">
         {searchs.map((search: ICharacter) => {
-          return <Card data={search} type="characters" key={search.id}/>;
+          return <Card data={search} type="characters" key={search.id} />;
         })}
-        {data.characters.info.pages != "1" ? (
+        {pagestotal !== 1 ? (
           <div className="pagination">
             <Pagination
               current={page}
               onChange={onChange}
-              total={data.characters.info.pages * 10}
+              total={pagestotal * 10}
             />
           </div>
         ) : null}
@@ -94,7 +159,3 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
 };
 
 export default CharactersQuery;
-
-{
-  /* <Card data={search} type="characters"/> */
-}
