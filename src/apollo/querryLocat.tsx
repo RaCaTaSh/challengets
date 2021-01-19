@@ -84,7 +84,7 @@ const LOCATIONS_QUERY: FC<Props> = ({ search, option }) => {
         {locs.map((location: ILocation) => {
           return <Card data={location} type="locations" key={location.id}/>
         })}
-        {data.locations.info.pages !== "1" ? (
+        {data.locations.info.pages !== 1 ? (
           <div className="pagination">
             <Pagination
               current={page}

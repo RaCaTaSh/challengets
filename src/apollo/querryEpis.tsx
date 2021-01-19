@@ -81,7 +81,7 @@ const EPISODE_QUERY: FC<Props> = ({ search, option }) => {
         {epis.map((episode: IEpisode) => {
           return <Card data={episode} type="episodes" key={episode.id} />;
         })}
-        {data.episodes.info.pages !== "1" ? (
+        {data.episodes.info.pages !== 1 ? (
           <div className="pagination">
             <Pagination
               current={page}
