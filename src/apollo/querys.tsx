@@ -14,8 +14,8 @@ const Querys: FC<Props> = ({ option, search }) => {
   const op:string=option
   if (search.length > 2) {
     if (char) return <CharactersQuery search={search} option={op} />;
-    if (loc) return <LOCATIONS_QUERY search={search} option={op} />;
-    if (epi) return <EPISODE_QUERY search={search} option={op} />;
+    if (loc) return <CharactersQuery search={search} option={op} />;
+    if (epi) return <CharactersQuery search={search} option={op} />;
     if (option === "") return null;
   } else {
     return null;

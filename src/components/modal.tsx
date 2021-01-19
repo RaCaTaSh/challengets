@@ -14,7 +14,8 @@ interface Character {
 }
 const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
   const chars = [];
-  if (type === "locations") {
+  if (type.startsWith("location")) {
+  
     for (let i = 0; i < 5; i++) {
       chars.push(data.residents[i]);
       if (i === data.residents.length - 1) {
@@ -22,7 +23,8 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
       }
     }
   }
-  if (type === "episodes") {
+  if (type.startsWith("episode")) {
+    console.log(data.characters)
     for (let i = 0; i < 5; i++) {
       chars.push(data.characters[i]);
       if (i === data.characters.length - 1) {
@@ -30,6 +32,7 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
       }
     }
   }
+
   return (
     <Modal
       visible={isOpen}
@@ -38,7 +41,7 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
       footer={null}
       bodyStyle={{ font: "Arial", fontSize: "medium", textAlign: "center" }}
     >
-      {type === "characters" ? (
+      {type.startsWith("character") ? (
         <div>
           <img alt={data.name} src={data.image} />
           <br />
@@ -55,7 +58,7 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
         </div>
       ) : null}
 
-      {type === "locations" ? (
+      {type.startsWith("location") ? (
         <div>
           <strong>{data.name}</strong>
           <br />
@@ -70,7 +73,7 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
         </div>
       ) : null}
 
-      {type === "episodes" ? (
+      {type.startsWith("episode") ? (
         <div>
           <strong>{data.name}</strong>
           <br />
@@ -85,7 +88,7 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
         </div>
       ) : null}
 
-      {type !== "characters" ? (
+      {!type.startsWith("character") ? (
         <div>
           {chars.map((char: Character) => {
             return (

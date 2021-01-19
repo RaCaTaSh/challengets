@@ -20,6 +20,7 @@ interface ICharacter {
 const CharactersQuery: FC<Props> = ({ search, option }) => {
   const [searchs, setSearchs] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
+  const [totalpages,setTotalpages]=useState<number>(1)
   function QueryType(option: string): any {
     if (option.startsWith("character")) {
       return gql`
@@ -110,22 +111,19 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
     setPage(page);
   };
   
-
   useEffect(() => {
-    var pagestotal: number = 0;
     if (data && !loading && !error) {
       if (option.startsWith("character")) {
         setSearchs([...data.characters.results]);
-        pagestotal = data.characters.info.pages;
-        console.log(pagestotal);
+        setTotalpages(data.characters.info.pages)
       }
       if (option.startsWith("location")) {
-        setSearchs([...data.location.results]);
-        pagestotal = data.locations.info.pages;
+        setSearchs([...data.locations.results]);
+        setTotalpages(data.locations.info.pages)
       }
       if (option.startsWith("episodes")) {
         setSearchs([...data.episodes.results]);
-        pagestotal = data.episodes.info.pages;
+        setTotalpages(data.episodes.info.pages)
       }
     } // eslint-disable-next-line
   }, [data, error, loading]);
@@ -137,19 +135,19 @@ const CharactersQuery: FC<Props> = ({ search, option }) => {
       </div>
     );
   if (error) return <h2 className="error">No results found</h2>;
-
   return (
     <div>
+      {console.log(data)}
       <div className="contenedor">
-        {searchs.map((search: ICharacter) => {
-          return <Card data={search} type="characters" key={search.id} />;
+        {searchs.map((search: any) => {
+          return <Card data={search} type={option} key={search.id} />;
         })}
-        {pagestotal !== 1 ? (
+        {totalpages !== 1 ? (
           <div className="pagination">
             <Pagination
               current={page}
               onChange={onChange}
-              total={pagestotal * 10}
+              total={totalpages * 10}
             />
           </div>
         ) : null}

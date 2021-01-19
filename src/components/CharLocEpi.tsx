@@ -11,7 +11,7 @@ interface Props {
 const Card: FC<Props> = ({ data, type }) => {
   const { isOpen, handlerOpenModal } = useModal();
   if (data) {
-    if (type === "characters") {
+    if (type.startsWith("character")) {
       return (
         <div key={data.id} className="character">
           <div onClick={handlerOpenModal} className="character2">
@@ -29,7 +29,7 @@ const Card: FC<Props> = ({ data, type }) => {
         </div>
       );
     }
-    if (type === "locations") {
+    if (type.startsWith("location")) {
       return (
         <div key={data.id}>
           <div className="location" onClick={handlerOpenModal}>
@@ -48,7 +48,7 @@ const Card: FC<Props> = ({ data, type }) => {
         </div>
       );
     }
-    if (type === "episodes") {
+    if (type.startsWith("episode")) {
       return (
         <div key={data.id}>
           <div className="episode" onClick={handlerOpenModal}>
