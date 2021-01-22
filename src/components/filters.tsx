@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import "./styles.css";
 import { useState } from "react";
-import Querys from "../apollo/querys";
+import CharLocEpisQuery from "./CharLocEpi";
 
 interface Props {
   search: string;
@@ -123,7 +123,8 @@ const Filters: FC<Props> = ({ search }) => {
         </footer>
       </div>
       <div className="busc">
-        <Querys search={search} option={option} />
+        {search.length > 2 ? <CharLocEpisQuery search={search} option={option} />:null}
+       
       </div>
     </div>
   );
