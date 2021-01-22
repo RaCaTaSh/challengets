@@ -1,5 +1,6 @@
 const Loader = (): JSX.Element => {
   return (
+    <div className="loader">
     <div className="lds-roller">
       <div></div>
       <div></div>
@@ -9,6 +10,7 @@ const Loader = (): JSX.Element => {
       <div></div>
       <div></div>
       <div></div>
+    </div>
     </div>
   );
 };

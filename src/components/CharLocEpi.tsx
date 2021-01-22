@@ -1,73 +1,97 @@
-import React, { FC } from "react";
-import "./styles.css";
-import { charInterface, epiInterface, locInterface } from "./types";
-import useModal from "../hooks/useModal";
-import AllModal from "./modal";
+import React, { useState, useEffect, FC } from "react";
+import { useQuery } from "@apollo/client";
+import Loader from "./loader";
+import { Pagination } from "antd";
+import Card from "./Card";
+import {
+  characterQuery,
+  locationQuery,
+  episodeQuery,
+} from "../apollo/allQuerys";
 interface Props {
-  data: charInterface | locInterface | epiInterface | any;
-  type: string;
+  search: string;
+  option: string;
 }
 
-const Card: FC<Props> = ({ data, type }) => {
-  const { isOpen, handlerOpenModal } = useModal();
-  if (data) {
-    if (type.startsWith("character")) {
-      return (
-        <div key={data.id} className="character">
-          <div onClick={handlerOpenModal} className="character2">
-            <img alt={data.name} src={data.image} />
-            <h1>{data.name}</h1>
-          </div>
-          <div>
-            <AllModal
-              isOpen={isOpen}
-              data={data}
-              handlerOpenModal={handlerOpenModal}
-              type="characters"
-            />
-          </div>
-        </div>
-      );
+const CharLocEpisQuery: FC<Props> = ({ search, option }) => {
+  const [searchs, setSearch] = useState<any>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalpages, setTotalpages] = useState<number>(1);
+
+  function QueryType(option: string): any {
+    if (option.startsWith("character")) {
+      return characterQuery;
     }
-    if (type.startsWith("location")) {
-      return (
-        <div key={data.id}>
-          <div className="location" onClick={handlerOpenModal}>
-            <p>{data.name}</p>
-            <br />
-            <p>{data.dimension}</p>
-          </div>
-          <div>
-            <AllModal
-              isOpen={isOpen}
-              data={data}
-              handlerOpenModal={handlerOpenModal}
-              type="locations"
-            />
-          </div>
-        </div>
-      );
+    if (option.startsWith("location")) {
+      return locationQuery;
     }
-    if (type.startsWith("episode")) {
-      return (
-        <div key={data.id}>
-          <div className="episode" onClick={handlerOpenModal}>
-            <p>{data.name}</p>
-            <br />
-            <p>{data.episode}</p>
-          </div>
-          <div>
-            <AllModal
-              isOpen={isOpen}
-              data={data}
-              handlerOpenModal={handlerOpenModal}
-              type="episodes"
-            />
-          </div>
-        </div>
-      );
+    if (option.startsWith("episode")) {
+      return episodeQuery;
     }
   }
-  return <></>;
+  var searchname: string = "";
+  var searchtype: string = "";
+  if (
+    option === "charactername" ||
+    option === "locationname" ||
+    option === "episodename"
+  ) {
+    searchname = search;
+    searchtype = "";
+  }
+  if (
+    option === "charactertype" ||
+    option === "locationtype" ||
+    option === "episodeepisode"
+  ) {
+    searchname = "";
+    searchtype = search;
+  }
+  const { data, loading, error } = useQuery(QueryType(option), {
+    variables: { name: searchname, page: page, type: searchtype , episode:searchtype },
+  });
+  const onChange = (page: number): void => {
+    setPage(page);
+  };
+
+  useEffect(() => {
+    if (data && !loading && !error) {
+      if (option.startsWith("character")) {
+        setTotalpages(data.characters.info.pages);
+        setSearch([...data.characters.results]);
+      }
+      if (option.startsWith("location")) {
+        setTotalpages(data.locations.info.pages);
+        setSearch([...data.locations.results]);
+      }
+      if (option.startsWith("episode")) {
+        setTotalpages(data.episodes.info.pages);
+        setSearch([...data.episodes.results]);
+      }
+    } // eslint-disable-next-line
+  }, [data]);
+
+  if (loading) return <Loader />
+  if (error) return <h2 className="error">No results found</h2>;
+
+  return (
+    <div>
+      <div className="contenedor">
+        {searchs.map((search: any) => {
+          return <Card data={search} type={option} key={search.id} />;
+        })}
+        {totalpages !== 1 ? (
+          <div className="pagination">
+            <Pagination
+              current={page}
+              onChange={onChange}
+              total={totalpages * 10}
+            />
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
 };
-export default Card;
+
+export default CharLocEpisQuery;

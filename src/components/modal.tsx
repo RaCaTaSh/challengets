@@ -2,9 +2,10 @@ import React, { FC } from "react";
 import "./styles.css";
 import { Modal } from "antd";
 import "antd/dist/antd.css";
+import { charInterface, locInterface, epiInterface } from "./types";
 interface Props {
   isOpen: boolean;
-  data: any;
+  data: charInterface | locInterface | epiInterface | any;
   handlerOpenModal: () => void;
   type: string;
 }
@@ -14,8 +15,8 @@ interface Character {
 }
 const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
   const chars = [];
-  if (type.startsWith("location")) {
-  
+
+  if (data.residents !== undefined) {
     for (let i = 0; i < 5; i++) {
       chars.push(data.residents[i]);
       if (i === data.residents.length - 1) {
@@ -23,8 +24,7 @@ const AllModal: FC<Props> = ({ isOpen, data, handlerOpenModal, type }) => {
       }
     }
   }
-  if (type.startsWith("episode")) {
-    console.log(data.characters)
+  if (data.characters !== undefined) {
     for (let i = 0; i < 5; i++) {
       chars.push(data.characters[i]);
       if (i === data.characters.length - 1) {
