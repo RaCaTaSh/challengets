@@ -7,7 +7,7 @@ import {
   characterQuery,
   locationQuery,
   episodeQuery,
-} from "../apollo/allQuerys";
+} from "../apollo/querys/allQuerys";
 interface Props {
   search: string;
   option: string;
